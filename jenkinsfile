@@ -1,7 +1,9 @@
 pipeline {
     agent any
-
-    stages {
+     parameters {
+       choice choices: ['dev', 'test', 'prod'], description: 'choose the env to deploy', name: 'envName'
+    }
+  stages {
         stage('maven build') {
             steps {
                 sh 'mvn clean package'
