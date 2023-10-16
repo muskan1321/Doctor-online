@@ -9,13 +9,19 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('dev deploy') {
+        stage('deploy to dev') {
             steps {
-               sshagent(['tomcat-dev']) {
-                sh "scp -o StrictHostKeyChecking=no target/doctor-online.war ec2-user@172.31.19.102:/opt/tomcat9/webapps"
-                sh "ssh ec2-user@172.31.19.102 /opt/tomcat9/bin/shutdown.sh"
-                 sh "ssh ec2-user@172.31.19.102 /opt/tomcat9/bin/startup.sh"
-             }
+              echo "deploy to dev"
+            }
+        }
+         stage('deploy to test') {
+            steps {
+              echo "deploy to test"
+            }
+        }
+        stage('deploy to prod') {
+            steps {
+              echo "deploy to prod"
             }
         }
     }
